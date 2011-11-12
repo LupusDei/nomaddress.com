@@ -20,6 +20,10 @@
     <%= f.label "Zip Code" %><br />
     <%= f.text_field :zip %>
   </div>
+  <div class="field">
+    <%= f.label "Valid Until" %><br />
+    <%= date_select("valid_until", :valid_until, :order => [:day, :month, :year]) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
