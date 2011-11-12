@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111112202809) do
+ActiveRecord::Schema.define(:version => 20111112232651) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20111112202809) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "valid_until"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
@@ -33,6 +34,14 @@ ActiveRecord::Schema.define(:version => 20111112202809) do
     t.string   "fb_uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.datetime "last_login_at"
+    t.datetime "last_request_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.integer  "login_count",       :default => 0, :null => false
   end
 
 end
