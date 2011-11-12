@@ -1,0 +1,26 @@
+<%= form_for(@address) do |f| %>
+  <%= render "shared/error_messages", :target => @address %>
+  <div class="field">
+    <%= f.label "Street" %><%="*" %><br />
+    <%= f.text_field :line1 %>
+  </div>
+  <div class="field">
+    <%= f.label "Apt #" %><br />
+    <%= f.text_field :line2 %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label "Zip Code" %><br />
+    <%= f.text_field :zip %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
