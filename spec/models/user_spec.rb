@@ -23,4 +23,12 @@ describe User do
     user.addresses.size.should == 1
   end
 
+  it "becomes active after confirmation" do
+    @valid_user.save
+    @valid_user.status.should == "pending"
+
+    @valid_user.confirm!
+
+    @valid_user.reload.status.should == "active"
+  end
 end

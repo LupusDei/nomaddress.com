@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111112232651) do
+ActiveRecord::Schema.define(:version => 20111112234553) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -41,7 +41,8 @@ ActiveRecord::Schema.define(:version => 20111112232651) do
     t.datetime "last_request_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.integer  "login_count",       :default => 0, :null => false
+    t.integer  "login_count",       :default => 0,         :null => false
+    t.string   "status",            :default => "pending"
   end
 
 end
