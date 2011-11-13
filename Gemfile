@@ -21,6 +21,7 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'sqlite3'
   gem 'watchr'
   gem 'spork', '~> 0.9.0.rc'
 end
