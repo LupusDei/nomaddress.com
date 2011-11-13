@@ -1,30 +1,28 @@
 <%= form_for(@address) do |f| %>
   <%= render "shared/error_messages", :target => @address %>
-  <div class="field">
-    <%= f.label "Street" %><%="*" %><br />
-    <%= f.text_field :line1 %>
+  <div class="fields">
+    <div class="field">
+      <%= f.label "Street" %><%="*" %>
+      <%= f.label "Apt #", :class => "apt_label" %><br />
+      <%= f.text_field :line1 %>
+      <%= f.text_field :line2, :class => "apt_text" %>
+    </div>
+    <div class="field">
+      <%= f.label :city %><br />
+      <%= f.text_field :city, :style => "width: 60%;" %>
+    </div>
+    <div class="field">
+      <%= f.label :state %>
+      <%= f.label "Zip", :style => "padding-left: 148px;" %><br />
+      <%= f.text_field :state, :style => "width: 120px;" %>
+      <%= f.text_field :zip, :style => "margin-left: 50px; width: 60px;" %>
+    </div>
+    <div class="field", style="display:hidden;">
+      <%= f.label "Valid Until" %>
+      <%= date_select("valid_until", :valid_until, :order => [:day, :month, :year]) %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label "Apt #" %><br />
-    <%= f.text_field :line2 %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label "Zip Code" %><br />
-    <%= f.text_field :zip %>
-  </div>
-  <div class="field">
-    <%= f.label "Valid Until" %><br />
-    <%= date_select("valid_until", :valid_until, :order => [:day, :month, :year]) %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="next_button">
+    <%= f.submit "Next", :type => :image, :src => "assets/next_button.png" %>
   </div>
 <% end %>

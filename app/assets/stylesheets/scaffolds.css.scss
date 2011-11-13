@@ -1,9 +1,51 @@
 body {
-  background-color: #fff;
+  background-image: url('background.png');
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px; }
+
+.header {
+  padding-top: 30px;
+}
+
+.threestep h2 {
+  font-family: helvetica;
+  font-size: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.form_box {
+  background-image: url('form_outline.png');
+  background-color: #fff;
+  width: 520px;
+  height: 199px;
+  margin-left: 27%;
+}
+
+.form_box .fields {
+  padding-top: 20px;
+  line-height: 12px;
+}
+
+.form_box .field {
+  font-size: 10px;
+  padding: 0 0 0 120px; 
+}
+
+.apt_label {
+  padding-left: 165px;
+}
+.apt_text {
+  margin-left: 25px;
+  width: 30px;
+}
+
+.next_button {
+  margin-top: -20px;
+  margin-left: 85%
+}
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
