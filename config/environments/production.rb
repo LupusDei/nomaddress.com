@@ -51,7 +51,7 @@ NomaddressCom::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.perform_deliveries = true
 
-  config.smtp_settings = {
+  ActionMailer::Base.smtp_settings = {
    :enable_starttls_auto => true,  #this is the important shit!
    :address        => 'smtp.gmail.com',
    :port           => 587,
