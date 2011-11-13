@@ -1,4 +1,8 @@
 NomaddressCom::Application.routes.draw do
+  resources :subscribers
+
+  resources :subscriptions
+
   resources :users
 
   resources :addresses

@@ -1,3 +1,4 @@
+public/assets/application*
 .bundle
 *.swp
 db/*.sqlite3

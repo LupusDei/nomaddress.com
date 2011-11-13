@@ -44,8 +44,7 @@ class AddressesController < ApplicationController
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
-        format.json { render json: @address, status: :created, location: @address }
+        format.html { redirect_to :controller => 'subscriptions', :action => 'new',  :address_id => @address.id }
       else
         format.html { render action: "new" }
         format.json { render json: @address.errors, status: :unprocessable_entity }

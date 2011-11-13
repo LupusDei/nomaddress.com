@@ -1,8 +1,7 @@
 <%= form_for(@address) do |f| %>
-  <%= render "shared/error_messages", :target => @address %>
   <div class="fields">
     <div class="field">
-      <%= f.label "Street" %><%="*" %>
+      <%= f.label "Street" %>
       <%= f.label "Apt #", :class => "apt_label" %><br />
       <%= f.text_field :line1 %>
       <%= f.text_field :line2, :class => "apt_text" %>

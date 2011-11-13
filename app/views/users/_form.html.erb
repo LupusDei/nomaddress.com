@@ -1,26 +1,25 @@
 <%= form_for(@user) do |f| %>
-  <%= render "shared/error_messages", :target => @user %>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
+  <div class="fields" style="padding-top:7px;">
+    <div class="field">
+      <%= f.label "First Name" %>
+      <%= f.label "Last Name", :class => "lname" %><br />
+      <%= f.text_field :first_name, :style => "width:100px; margin-right:15px" %>
+      <%= f.text_field :last_name, :style => "width: 100px;" %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="next_button">
+    <%= f.submit "Next", :type => :image, :src => "/assets/next_button.png" %>
   </div>
 <% end %>

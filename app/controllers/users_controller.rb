@@ -43,18 +43,26 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
+    @user.addresses << Address.find(1)
     respond_to do |format|
       if @user.save
         mail = MailMan.confirmation(@user)
-        puts mail.inspect
         mail.deliver
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'Now you are good to go!' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def confirm
+    @user = User.find(params[:user_id] / 150)
+    if @user.confirm!
+      redirect_to @user, notice: "You are now activated!"
+    else
+      redirect_to :root
     end
   end
 

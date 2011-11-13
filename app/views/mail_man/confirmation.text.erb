@@ -1,5 +1,13 @@
-Sup Biotch!
-<%= @user.first_name %>, I want us to be friends, but yo dumb ass aint makin it easy!
+<%= @user.first_name %>,
+Thank you for registering with NomAddress. Please click the link below to activate your account.
 
-Your's Truly,
-NomAddress.com
+http://nomaddress.heroku.com/users/<%= @user.id * 150%>/confirm
+
+Thank you,
+
+NomAddress Team
+info@nomaddress.com
+
+
+<p style="font-size=8px">If you have not registered for our service then disregard this email.
+</p>

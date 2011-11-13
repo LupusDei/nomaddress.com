@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @subscriber.name %>
+</p>
+
+<p>
+  <b>Img path:</b>
+  <%= @subscriber.img_path %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @subscriber.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_subscriber_path(@subscriber) %> |
+<%= link_to 'Back', subscribers_path %>

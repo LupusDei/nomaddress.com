@@ -1,0 +1,10 @@
+<%= form_for(@subscription) do |f| %>
+  <div class="subscribers">
+    <% Subscriber.all.each do |sub| %>
+      <%= render 'subscriber', :subscriber => sub %>
+    <% end %>
+  </div>
+  <div class="next_button">
+    <%= f.submit "Next", :type => :image, :src => "/assets/next_button.png" %>
+  </div>
+<% end %>

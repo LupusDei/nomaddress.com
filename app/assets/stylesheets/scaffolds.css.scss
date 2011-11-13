@@ -12,7 +12,7 @@ body {
 .threestep h2 {
   font-family: helvetica;
   font-size: 20px;
-  color: #333;
+  color: #555;
   text-align: center;
 }
 
@@ -42,9 +42,21 @@ body {
   width: 30px;
 }
 
+.lname {
+  padding-left: 68px;
+}
+
 .next_button {
   margin-top: -20px;
-  margin-left: 85%
+  margin-left: 85%;
+}
+
+.subscriber_img {
+  padding: 10px 15px 0 0;
+}
+
+.subscribers {
+  padding: 20px 30px 50px 30px;
 }
 
 #clouds {
