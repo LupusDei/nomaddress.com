@@ -1,15 +1,4 @@
 class SubscriptionsController < ApplicationController
-  # GET /subscriptions
-  # GET /subscriptions.json
-  def index
-    @subscriptions = Subscription.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @subscriptions }
-    end
-  end
-
   # GET /subscriptions/1
   # GET /subscriptions/1.json
   def show
@@ -24,7 +13,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/new
   # GET /subscriptions/new.json
   def new
-    @subscription = Subscription.new
+    @subscription = Subscription.new(:address_id => params[:address_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,13 +29,11 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    @subscription1 = Subscription.new(:address_id => 1, :subscriber_id => 1)
-    @subscription2 = Subscription.new(:address_id => 1, :subscriber_id => 2)
+    @subscription = Subscription.new(:address_id => params[:address]["id"], :subscriber_id => 2)
 
     respond_to do |format|
-      @subscription1.save
-      @subscription2.save
-      format.html { redirect_to :controller => 'users', :action => 'new', :address_id => 1}
+      @subscription.save
+      format.html { redirect_to :controller => 'users', :action => 'new', :address_id => params[:address]["id"]}
     end
   end
 

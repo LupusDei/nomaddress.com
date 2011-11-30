@@ -1,27 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div id="welcome">
+  Welcome to NomAddress <%= @user.first_name%>!
+  <p id="construction">The site is currently under construction, but you will be hearing from us soon!</p>
+</div>
 
-<p>
-  <b>First name:</b>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <b>Gender:</b>
-  <%= @user.gender %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Fb uid:</b>
-  <%= @user.fb_uid %>
-</p>
+<div id="address">
+  <%="So far we have just your '#{@user.addresses.first.line1}' address in our records."%>
+</div>
 

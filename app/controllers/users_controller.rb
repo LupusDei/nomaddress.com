@@ -1,17 +1,6 @@
 class UsersController < ApplicationController
  # before_filter :require_no_user, :only => [:new, :create]
  # before_filter :require_user, :only => [:show, :edit, :update]
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
-  end
-
   # GET /users/1
   # GET /users/1.json
   def show
@@ -27,7 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
+    @user.addresses << Address.find(params[:address_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -43,7 +32,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.addresses << Address.find(1)
+    @user.addresses << Address.find(params[:address]["id"])
     respond_to do |format|
       if @user.save
         mail = MailMan.confirmation(@user)

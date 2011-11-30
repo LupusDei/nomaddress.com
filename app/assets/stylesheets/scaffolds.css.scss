@@ -61,9 +61,9 @@ body {
 
 #clouds {
   width: 100%;
-  height: 262px;
+  height: 130px;
   padding-left: 0;
-  margin-left: -8px;
+  display:block;
   position: absolute;
   bottom: 0;
 }
@@ -96,6 +96,23 @@ div {
   padding: 2px;
   background-color: red;
   display: table; }
+
+#welcome {
+ text-align: center;
+ font-size: 18px;
+ font: 'Helvetica';
+}
+
+#construction {
+  font-size: 11px;
+  color: red;
+}
+
+#address {
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+}
 
 #error_explanation {
   width: 450px;
