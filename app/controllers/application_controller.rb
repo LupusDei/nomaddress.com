@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :current_user_session
 
+  def about
+    render "shared/about"
+  end
+
   private
 
   def current_user_session
