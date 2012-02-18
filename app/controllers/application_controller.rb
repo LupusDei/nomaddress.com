@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     render "shared/about"
   end
 
+  def faq
+    render "shared/faq"
+  end
+
   private
 
   def current_user_session
