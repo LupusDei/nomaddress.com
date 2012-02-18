@@ -133,3 +133,27 @@ div {
   ul li {
     font-size: 12px;
     list-style: square; } }
+
+
+#faq {
+  margin-left: 20px;
+  text-align: center;
+  h1 {
+    font-weight: bold;
+     }
+  
+  article.faq {
+    margin-bottom: 5px;
+  }
+
+  .question{
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  .answer{
+    font-size: 12px;
+    font-family: sans-serif, "Calibri"
+  }
+
+ }

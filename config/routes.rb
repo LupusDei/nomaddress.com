@@ -10,6 +10,8 @@ NomaddressCom::Application.routes.draw do
   resources :user_session
 
   match "about" => "application#about"
+
+  match "faq" => "application#faq"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
