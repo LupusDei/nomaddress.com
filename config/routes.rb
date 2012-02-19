@@ -1,4 +1,6 @@
 NomaddressCom::Application.routes.draw do
+  get "static_pages/error"
+
   resources :subscribers
 
   resources :subscriptions
