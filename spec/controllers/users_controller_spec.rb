@@ -24,27 +24,36 @@ describe UsersController do
   # User. As you add validations to User, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:first_name => "Test", :last_name => "User", :email => "user@user.user", :password => "password", :password_confirmation => "password"}
   end
 
-  describe "GET index" do
-    it "assigns all users as @users" do
-      user = User.create! valid_attributes
-      get :index
-      assigns(:users).should eq([user])
-    end
+  def ignore_login_required
+    controller.stub!(:require_user).and_return(true)
   end
 
   describe "GET show" do
-    it "assigns the requested user as @user" do
+
+    it "will not authorize non-loggedin users to view their show page" do
       user = User.create! valid_attributes
       get :show, :id => user.id.to_s
+
+      response.should redirect_to(login_path)
+    end
+    
+    it "assigns the requested user as @user" do
+      ignore_login_required
+      user = User.create! valid_attributes
+      get :show, :id => user.id.to_s
+      response.should be_success
       assigns(:user).should eq(user)
     end
   end
 
   describe "GET new" do
     it "assigns a new user as @user" do
+      ignore_login_required
+      addr = Address.new
+      Address.should_receive(:find).and_return(addr)
       get :new
       assigns(:user).should be_a_new(User)
     end
@@ -52,6 +61,7 @@ describe UsersController do
 
   describe "GET edit" do
     it "assigns the requested user as @user" do
+      ignore_login_required
       user = User.create! valid_attributes
       get :edit, :id => user.id.to_s
       assigns(:user).should eq(user)
@@ -59,37 +69,58 @@ describe UsersController do
   end
 
   describe "POST create" do
+    before do 
+      @address = Address.new(:line1 => "blah", :zip => "12345", :city => "Blah", :state => "IL", :type => "Home")
+      @address.should be_valid
+      @address.save
+    end
+
     describe "with valid params" do
+      def post_valid_user
+        post :create, :user => valid_attributes, :address => {"id" => @address.id}
+      end
+
       it "creates a new User" do
         expect {
-          post :create, :user => valid_attributes
+          post_valid_user
         }.to change(User, :count).by(1)
       end
 
       it "assigns a newly created user as @user" do
-        post :create, :user => valid_attributes
+        post_valid_user
         assigns(:user).should be_a(User)
         assigns(:user).should be_persisted
       end
 
       it "redirects to the created user" do
-        post :create, :user => valid_attributes
+        post_valid_user
         response.should redirect_to(User.last)
+      end
+
+      it "should login the created user" do
+        post_valid_user
+        user = User.last
+
+        user.should be_logged_in
       end
     end
 
     describe "with invalid params" do
+      def post_invalid_user
+        post :create, :user => {}, :address => {"id" => @address.id}
+      end
+
       it "assigns a newly created but unsaved user as @user" do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
-        post :create, :user => {}
+        post_invalid_user
         assigns(:user).should be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
-        post :create, :user => {}
+        post_invalid_user
         response.should render_template("new")
       end
     end
@@ -104,17 +135,20 @@ describe UsersController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         User.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        ignore_login_required
         put :update, :id => user.id, :user => {'these' => 'params'}
       end
 
       it "assigns the requested user as @user" do
         user = User.create! valid_attributes
+        ignore_login_required
         put :update, :id => user.id, :user => valid_attributes
         assigns(:user).should eq(user)
       end
 
       it "redirects to the user" do
         user = User.create! valid_attributes
+        ignore_login_required
         put :update, :id => user.id, :user => valid_attributes
         response.should redirect_to(user)
       end
@@ -125,6 +159,7 @@ describe UsersController do
         user = User.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
+        ignore_login_required
         put :update, :id => user.id.to_s, :user => {}
         assigns(:user).should eq(user)
       end
@@ -133,24 +168,10 @@ describe UsersController do
         user = User.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
+        ignore_login_required
         put :update, :id => user.id.to_s, :user => {}
         response.should render_template("edit")
       end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested user" do
-      user = User.create! valid_attributes
-      expect {
-        delete :destroy, :id => user.id.to_s
-      }.to change(User, :count).by(-1)
-    end
-
-    it "redirects to the users list" do
-      user = User.create! valid_attributes
-      delete :destroy, :id => user.id.to_s
-      response.should redirect_to(users_url)
     end
   end
 

@@ -9,6 +9,13 @@
 <body>
   <div class= 'header'>
     <img src='/assets/chopped-logo.png'/>
+    <div style="float:right">
+      <% if current_user %>
+        <%= link_to 'logout', logout_path %>
+      <% else %>
+         <%= link_to 'login', login_path %>
+      <% end %>
+    </div>
   </div>
   <%= yield %>
   <div class='footer'>

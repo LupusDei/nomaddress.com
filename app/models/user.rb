@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
+  acts_as_authentic do |c|
+    c.login_field = :email
+  end
   has_many :addresses
   validates :first_name, :presence => true
   validates :last_name, :presence => true
