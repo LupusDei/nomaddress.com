@@ -9,6 +9,8 @@ NomaddressCom::Application.routes.draw do
 
   resource :user_sessions
 
+  match "address_display" => "addresses#addressdisplay"
+
   match "about" => "application#about"
 
   match "faq" => "application#faq"
