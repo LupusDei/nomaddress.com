@@ -2,15 +2,26 @@
 <html>
 <head>
   <title>NomAddress</title>
-  <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js" %>
+  <%= stylesheet_link_tag    "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class= 'header'>
     <img src='/assets/chopped-logo.png'/>
+    <div style="float:right">
+      <% if current_user %>
+        <%= link_to 'logout', logout_path %>
+      <% else %>
+         <%= link_to 'login', login_path %>
+      <% end %>
+    </div>
   </div>
   <%= yield %>
+  <div class='footer'>
+  <%= link_to 'About', about_path %>
+  </div>
   <img id='clouds'src="/assets/clouds.png" />
     
 </body>

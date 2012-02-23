@@ -7,11 +7,17 @@ NomaddressCom::Application.routes.draw do
 
   resources :addresses
 
-  resources :user_session
+  resource :user_sessions
+
+  match "address_display" => "addresses#addressdisplay"
 
   match "about" => "application#about"
 
   match "faq" => "application#faq"
+
+  match "login" => "user_sessions#new"
+
+  match "logout" => "user_sessions#destroy"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

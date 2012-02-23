@@ -1,4 +1,9 @@
 class AddressesController < ApplicationController
+
+  def addressdisplay
+    render "addresses/address_display"
+  end
+
   def show
     @address = Address.find(params[:id])
 
