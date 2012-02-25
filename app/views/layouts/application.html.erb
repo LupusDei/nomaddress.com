@@ -8,6 +8,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<style type="text/css">
+	a.img_link:hover {background-color:transparent !important;}
+</style>
+
   <div class= 'header'>
     <img src='/assets/chopped-logo.png'/>
     <div style="float:right">
@@ -19,10 +23,12 @@
     </div>
   </div>
   <%= yield %>
-  <div class='footer'>
-  <%= link_to 'About', about_path %>
+  <br>
+  <br>
+  <div class='footer' style="text-align:center;">
+  	<%= render 'layouts/footer' %>
   </div>
-  <img id='clouds'src="/assets/clouds.png" />
+  <img id='clouds'src="/assets/clouds.png" style="z-index:-1"/>
     
 </body>
 </html>

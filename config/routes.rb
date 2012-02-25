@@ -14,6 +14,10 @@ NomaddressCom::Application.routes.draw do
   match "about" => "application#about"
 
   match "faq" => "application#faq"
+    
+  match "privacy" => "application#privacy"
+
+  match "contact" => "application#contact"
 
   match "login" => "user_sessions#new"
 
