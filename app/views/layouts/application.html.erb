@@ -8,8 +8,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
   <div class= 'header'>
-    <img src='/assets/chopped-logo.png'/>
+    <a href="/" class="img_link"><img src='/assets/chopped-logo.png'/></a>
     <div style="float:right">
       <% if current_user %>
         <%= link_to 'logout', logout_path %>
@@ -19,10 +20,12 @@
     </div>
   </div>
   <%= yield %>
-  <div class='footer'>
-  <%= link_to 'About', about_path %>
+  <br>
+  <br>
+  <div class='footer' style="text-align:center;">
+  	<%= render 'layouts/footer' %>
   </div>
-  <img id='clouds'src="/assets/clouds.png" />
+  <img id='clouds'src="/assets/clouds.png" style="z-index:-1"/>
     
 </body>
 </html>
