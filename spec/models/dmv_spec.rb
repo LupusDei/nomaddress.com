@@ -32,6 +32,11 @@ describe Dmv do
     @valid_dmv.should_not be_valid
   end
 
+  it "ssn should only contains digits" do
+    @valid_dmv.ssn = "cra1"
+    @valid_dmv.should_not be_valid
+  end
+
   it "ssn should only be 4 digit" do
     @valid_dmv.ssn = "123"
     @valid_dmv.should_not be_valid
@@ -42,6 +47,6 @@ describe Dmv do
 
   it "county should only contains letters" do
     @valid_dmv.county = "123crazy"
-    @valid_dmv.county.should_not be_valid
+    @valid_dmv.should_not be_valid
   end
 end
