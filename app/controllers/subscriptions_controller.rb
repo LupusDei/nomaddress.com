@@ -29,11 +29,11 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    @subscription = Subscription.new(:address_id => params[:address]["id"], :subscriber_id => 2)
+    @subscription = Subscription.new(params[:subscription])
 
     respond_to do |format|
       @subscription.save
-      format.html { redirect_to :controller => 'users', :action => 'new', :address_id => params[:address]["id"]}
+      format.html { redirect_to :controller => 'users', :action => 'new', :address_id => @subscription.address_id.to_s}
     end
   end
 

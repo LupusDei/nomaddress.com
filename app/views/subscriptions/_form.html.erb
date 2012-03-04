@@ -2,7 +2,7 @@
   <div class="subscribers">
     <% Subscriber.all.each do |sub| %>
       <%= render 'subscriber', :subscriber => sub %>
-      <%= hidden_field :address, :id, :value => @subscription.address_id %>
+      <%= f.hidden_field :address_id, :value => @subscription.address_id %>
     <% end %>
   </div>
   <div class="next_button">
