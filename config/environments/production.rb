@@ -49,7 +49,7 @@ NomaddressCom::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.perform_deliveries = true
+  config.perform_deliveries = false
 
   ActionMailer::Base.smtp_settings = {
    :enable_starttls_auto => true,  #this is the important shit!
@@ -58,8 +58,9 @@ NomaddressCom::Application.configure do
    :domain         => 'nomaddress.com',
    :authentication => :plain,
    :user_name      => 'mail@nomaddress.com',
-   :password       => 'electron1'
+   :password       => ''
   }
+#password is electron1
 
   # Enable threaded mode
   # config.threadsafe!

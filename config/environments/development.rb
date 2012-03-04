@@ -25,8 +25,9 @@ NomaddressCom::Application.configure do
    :domain         => 'nomaddress.com',
    :authentication => :plain,
    :user_name      => 'mail@nomaddress.com',
-   :password       => 'electron1'
+   :password       => ''
   }
+#password is electron1
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
