@@ -41,6 +41,16 @@ describe SubscriptionsController do
         assigns(:subscription).should be_a(Subscription)
         assigns(:subscription).should be_persisted
       end
+
+      it "redirects to new user if the 'firsttime' param is present" do
+        post :create, :subscription => valid_attributes, :firsttime => true
+        response.should redirect_to(new_user_url(:address_id => "1"))
+      end
+
+      it "redirects to the subscription show page if 'firsttime' is not present" do
+        post :create, :subscription => valid_attributes
+        response.should redirect_to(Subscription.last)
+      end
     end
 
     describe "with invalid params" do

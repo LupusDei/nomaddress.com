@@ -7,3 +7,7 @@
   <%="So far we have just your '#{@user.addresses.first.line1}' address in our records."%>
 </div>
 
+<div id="subscriptions">
+  <%=link_to("Add a new subscription!", new_subscription_path(:address_id => @user.addresses.first.id)) %>
+</div>
+
