@@ -7,6 +7,10 @@ describe Dmv do
     @valid_dmv.should be_valid
   end
 
+  it "is a subscribable" do
+    @valid_dmv.subscription.should be_nil
+  end
+
   it "requires driver_license" do
     @valid_dmv.driver_license = ""
     @valid_dmv.should_not be_valid

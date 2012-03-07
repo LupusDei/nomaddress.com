@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120303204012) do
+ActiveRecord::Schema.define(:version => 20120304223241) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20120303204012) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "valid_until"
     t.integer  "user_id"
   end
 
@@ -50,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20120303204012) do
     t.integer  "address_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subscribable_id"
+    t.string   "subscribable_type"
   end
 
   create_table "users", :force => true do |t|
