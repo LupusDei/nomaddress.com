@@ -6,7 +6,7 @@ Script to add a new address on Amazon
 author: Chen Wang(wang213), Feng Shan(shan16)
 
 11:50 PM CST
-March 3rd, 2012
+March 6th, 2012
 
 """
 
@@ -16,7 +16,8 @@ import mechanize
 
 # Validate arguments
 if (sys.argv.__len__() != 11):
-    sys.exit("Arguments Invalid. \nUsage: filename email password full_name address1 addres2 city state zipcode country phone_number")
+    print ("Arguments Invalid. \nUsage: filename email password full_name address1 addres2 city state zipcode country phone_number")
+    sys.exit(0)
 
 # Store all user inputs
 email = sys.argv[1]
@@ -45,7 +46,8 @@ browser["password"] = password
 browser.submit()
 
 if (browser.title() == "Sign In"): # Wrong password or email
-    sys.exit("The email address and password you entered do not match any accounts on record.")
+    print "The email address and password you entered do not match any accounts on record."
+    sys.exit(0)
 
 # Go to Add New Address page
 browser.open("https://www.amazon.com/gp/css/account/address/view.html?viewID=newAddress")
@@ -67,7 +69,8 @@ browser["enterAddressPhoneNumber"] = phone
 browser.submit(name="newAddress")
 
 if (browser.title() == "Your Account"):
-    sys.exit("Congratulations! Successfully added new address!")
+    print "Congratulations! Successfully added new address!"
+    sys.exit(0)
 else:
     browser.select_form(nr=1)
 
@@ -110,4 +113,4 @@ try:
 
 except mechanize._form.ControlNotFoundError, e:
     # Could not find the control, due to invalid address. Exit
-    sys.exit("Failed to add new address! Address not valid!")
+    print "Failed to add new address! Address not valid!"
