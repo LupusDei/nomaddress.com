@@ -1,0 +1,12 @@
+<%= form_for(@subscription) do |f| %>
+  <div class="subscribers">
+    <% Subscriber.all.each do |sub| %>
+      <%= render 'subscriber', :subscriber => sub %>
+      <%= f.hidden_field :address_id, :value => @subscription.address_id %>
+      <%= hidden_field :firsttime, "true"%>
+    <% end %>
+  </div>
+  <div class="next_button">
+    <%= f.submit "Next", :type => :image, :src => "/assets/next_button.png" %>
+  </div>
+<% end %>

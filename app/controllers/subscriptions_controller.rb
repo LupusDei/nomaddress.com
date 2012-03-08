@@ -14,10 +14,15 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/new.json
   def new
     @subscription = Subscription.new(:address_id => params[:address_id])
+    @subscribable = Dmv.new(:address_id => params[:address_id])
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @subscription }
+    if params[:firsttime]
+      render :firsttime
+    else
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @subscription }
+      end
     end
   end
 
@@ -29,11 +34,19 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    @subscription = Subscription.new(:address_id => params[:address]["id"], :subscriber_id => 2)
+    if params[:firsttime]
+      @subscription = Subscription.new(params[:subscription])
 
-    respond_to do |format|
       @subscription.save
-      format.html { redirect_to :controller => 'users', :action => 'new', :address_id => params[:address]["id"]}
+      respond_to do |format|
+        format.html { redirect_to :controller => 'users', :action => 'new', :address_id => @subscription.address_id.to_s}
+      end
+    else
+      @subscription = Subscription.create(:address_id => params[:dmv][:address_id])
+      @dmv = Dmv.new(params[:dmv])
+      @dmv.subscription = @subscription
+      @dmv.save
+      redirect_to @subscription
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120223235208) do
+ActiveRecord::Schema.define(:version => 20120304223241) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(:version => 20120223235208) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  create_table "dmvs", :force => true do |t|
+    t.string   "driver_license"
+    t.string   "ssn"
+    t.integer  "address_id"
+    t.string   "county"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dmvs", ["address_id"], :name => "index_dmvs_on_address_id"
 
   create_table "subscribers", :force => true do |t|
     t.string   "name"
@@ -38,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20120223235208) do
     t.integer  "address_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subscribable_id"
+    t.string   "subscribable_type"
   end
 
   create_table "users", :force => true do |t|

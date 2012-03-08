@@ -1,11 +1,18 @@
-<%= form_for(@subscription) do |f| %>
-  <div class="subscribers">
-    <% Subscriber.all.each do |sub| %>
-      <%= render 'subscriber', :subscriber => sub %>
-      <%= hidden_field :address, :id, :value => @subscription.address_id %>
-    <% end %>
+<%= form_for(@subscribable, :url => {:controller => :subscriptions, :action => :create}) do |f| %>
+  <%= f.hidden_field :address_id, :value => @subscribable.address_id %>
+  <div class="field">
+    <%= f.label :driver_license %><br />
+    <%= f.text_field :driver_license %>
   </div>
-  <div class="next_button">
-    <%= f.submit "Next", :type => :image, :src => "/assets/next_button.png" %>
+  <div class="field">
+    <%= f.label "Last 4 of SSN" %><br />
+    <%= f.text_field :ssn %>
+  </div>
+  <div class="field">
+    <%= f.label :county %><br />
+    <%= f.text_field :county %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
   </div>
 <% end %>

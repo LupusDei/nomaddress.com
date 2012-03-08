@@ -18,6 +18,7 @@ end
 
 gem 'authlogic'
 gem 'jquery-rails'
+gem 'railroady'
 
 group :development, :test do
   gem 'rspec-rails'

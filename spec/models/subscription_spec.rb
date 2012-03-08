@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe Subscription do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "has a subscribable" do
+    sub = Subscription.new
+    sub.subscribable.should be_nil
+  end
+
 end

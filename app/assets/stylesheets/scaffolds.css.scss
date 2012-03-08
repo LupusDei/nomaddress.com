@@ -114,6 +114,35 @@ div {
   color: #555;
 }
 
+/* User show page styles */
+#address {
+	text-align: center;
+	margin-left: 100px;
+}
+
+#user_box {
+	padding: 20px 20px; 
+	background-color: #cae6e9;
+	width: 500px;            
+}
+
+#buttons {
+	float: left;
+	background-color: #fff;
+	width: 250px;
+	height: 210px;
+	
+}
+
+#address button{
+	margin: 60px 20px;
+	float: left;
+	font-size: 50px;
+}
+.clear{
+	clear: both;
+}
+
 #error_explanation {
   width: 450px;
   border: 2px solid red;
