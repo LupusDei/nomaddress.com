@@ -121,6 +121,7 @@ div {
 }
 
 #user_box {
+  margin-left: 30%;
 	padding: 20px 20px; 
 	background-color: #cae6e9;
 	width: 500px;            
@@ -134,9 +135,8 @@ div {
 	
 }
 
-#address button{
+#user_box button {
 	margin: 60px 20px;
-	float: left;
 	font-size: 50px;
 }
 .clear{

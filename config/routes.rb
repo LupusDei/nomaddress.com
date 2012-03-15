@@ -6,6 +6,7 @@ NomaddressCom::Application.routes.draw do
   resources :subscriptions
 
   resources :users
+  match "run_update" => "users#run_update"
 
   resources :addresses
 

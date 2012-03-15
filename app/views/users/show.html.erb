@@ -8,18 +8,16 @@
 
 <div id="address">
 
-   <div id="user_box">
-		
-		<div id="buttons">
-			
-		</div>    
-		
-		<button id="update">Update</button>
+  <% @user.addresses.each do |a| %>
+    <%= render "addresses/quickshow.html.erb", :@address => a %>
+  <% end %>
+</div>
+<div id="user_box">
+
+  <div id="buttons">
+    <%= button_to "Update", :controller => "users", :action => "run_update", :address_id => @user.addresses.first.id %>
+  </div>    
 		<div class="clear"></div>
-	</div>
 
-
-  <%="So far we have just your '#{@user.addresses.first.line1}' address in our records."%>
-
-  </div>
+</div>
 

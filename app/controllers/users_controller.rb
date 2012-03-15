@@ -1,8 +1,19 @@
+require File.expand_path("../../lib/update_runner.rb", File.dirname(__FILE__))
+
 class UsersController < ApplicationController
  # before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
-  # GET /users/1
-  # GET /users/1.json
+
+
+  def run_update
+    address = current_user.addresses.find(params[:address_id])
+    dmv = address.subscriptions.find_by_subscribable_type("Dmv").subscribable
+    UpdateRunner.run_dmv({:driver_license => dmv.driver_license, :ssn => dmv.ssn,
+                          :county => dmv.county.upcase, :street => address.line1 + " " + address.line2,
+                          :city => address.city, :zipCode => address.zip}))
+    redirect_to user_path(current_user), :notice => "Your address update has completed successfully!"
+  end
+
   def show
     if current_user.id != params[:id].to_i
       redirect_to user_path(current_user)
@@ -16,8 +27,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
   def new
     @user = User.new
     @user.addresses << Address.find(params[:address_id])
@@ -27,20 +36,17 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(params[:user])
     @user.addresses << Address.find(params[:address]["id"])
     respond_to do |format|
       if @user.save
-        mail = MailMan.confirmation(@user)
-        mail.deliver
+        #mail = MailMan.confirmation(@user)
+        #mail.deliver
         format.html { redirect_to @user, notice: 'Now you are good to go!' }
         format.json { render json: @user, status: :created, location: @user }
       else
@@ -59,8 +65,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
   def update
     @user = User.find(params[:id])
 

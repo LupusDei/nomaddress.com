@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Line1:</b>
+  <%= @address.line1 %>
+
+<% if @address.line2 %>
+    <b>Line2:</b>
+    <%= @address.line2 %>
+<% end %>
+  <b>City:</b>
+  <%= @address.city %>
+  <b>State:</b>
+  <%= @address.state %>
+  <b>Zip:</b>
+  <%= @address.zip %>
+  <b>Category:</b>
+  <%= @address.category %>
+</p>
+
+<% @address.subscriptions.each do |sub| %>
+  <%= render "subscriptions/quickshow.html.erb", :@subscription => sub %>
+<% end %>
