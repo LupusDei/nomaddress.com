@@ -5,6 +5,7 @@ class Address < ActiveRecord::Base
   end
 
   belongs_to :user
+  has_many :subscriptions
   validates :line1, :state, :city, :zip ,:presence => true 
   validate :correct_category
 

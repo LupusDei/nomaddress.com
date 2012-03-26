@@ -2,12 +2,12 @@
 
 <p>
   <b>Subscriber:</b>
-  <%= @subscription.subscriber_id %>
+  <%= @subscription.subscribable.type %>
 </p>
 
 <p>
   <b>Address:</b>
-  <%= @subscription.address_id %>
+  <%= render "./../addresses/quickshow.html.erb", :address => @subscription.address %>
 </p>
 
 

@@ -86,13 +86,16 @@ lines = response4.readlines()
 count = 0
 
 #This is a hard coded hack for the DMV website, ideally we should parse the html but yeah
-
+success = 0
 for line in lines:
     count = count+1
-    if(count == 69):
-        line = line.replace('\t','').strip()
-        line = strip_tags(line)
-        if(line != "Your address has successfully been updated."):
-            print "Your address couldn't be updated."
-        else:
-            print line
+    line = line.replace('\t','').strip()
+    line = strip_tags(line)
+    if(line == "Your address has successfully been updated."):
+      success = 1
+      break
+
+if(success == 1):
+    print "Successful Update"
+else:
+    print "Update Failure"

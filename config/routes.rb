@@ -1,9 +1,12 @@
 NomaddressCom::Application.routes.draw do
+  get "static_pages/error"
+
   resources :subscribers
 
   resources :subscriptions
 
   resources :users
+  match "run_update" => "users#run_update"
 
   resources :addresses
 
