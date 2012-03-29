@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     dmv = address.subscriptions.find_by_subscribable_type("Dmv").subscribable
     UpdateRunner.run_dmv({:driver_license => dmv.driver_license, :ssn => dmv.ssn,
                           :county => dmv.county.upcase, :street => address.line1 + " " + address.line2,
-                          :city => address.city, :zipCode => address.zip}))
+                          :city => address.city, :zipCode => address.zip})
     redirect_to user_path(current_user), :notice => "Your address update has completed successfully!"
   end
 
