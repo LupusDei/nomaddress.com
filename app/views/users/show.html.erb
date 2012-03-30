@@ -14,7 +14,7 @@
 </div>
 <div id="user_box">
   <div id="buttons">
-  
+  	<%= render "addressDisplay.html.erb" %>
   </div>
   <%= button_to "Update", :controller => "users", :action => "run_update", :address_id => @user.addresses.first.id %>
       
