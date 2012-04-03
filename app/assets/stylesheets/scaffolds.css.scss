@@ -3,10 +3,17 @@ body {
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px; }
+  line-height: 18px;
+  height: 100%;
+}
 
 .header {
   padding-top: 30px;
+}
+
+
+section {
+  position: relative;
 }
 
 .threestep h2 {
@@ -17,11 +24,15 @@ body {
 }
 
 .form_box {
-  background-image: url('form_outline.png');
   background-color: #fff;
   width: 520px;
-  height: 199px;
-  margin-left: 27%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  box-shadow: inset -5px -5px #AAA;
+  padding: 0px 15px 10px 0px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#EEEEEE));
 }
 
 .form_box .fields {
@@ -47,8 +58,7 @@ body {
 }
 
 .next_button {
-  margin-top: -20px;
-  margin-left: 85%;
+  margin-left: 80%;
 }
 
 .subscriber_img {
@@ -64,8 +74,9 @@ body {
   height: 130px;
   padding-left: 0;
   display:block;
-  position: absolute;
+  position: relative;
   bottom: 0;
+  z-index: -1;
 }
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -121,18 +132,18 @@ div {
 }
 
 #user_box {
-  margin-left: 30%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 	padding: 20px 20px; 
-	background-color: #cae6e9;
-	width: 500px;            
+	background-color: #cae6e9;           
 }
 
 #buttons {
-	float: left;
-	background-color: #fff;
-	width: 560px;
-	height: 210px;
-	
+	background-color: #CAE6E9;
+  margin-left: auto;
+  margin-right: auto;
+  width: 340px;
 }
 
 .button_to {
@@ -194,9 +205,10 @@ div {
  }
 
 a.img_link:hover {background-color:transparent !important;}
+
+
 .footer {
-	position: absolute;
-	bottom: 70px;
-    	left: 50%;
-    	margin-left: -100px;
+	position: relative;
+  margin: 0px -100px -100px -100px;
 }
+

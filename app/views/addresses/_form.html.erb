@@ -1,3 +1,10 @@
+<script>
+
+  $(function() {
+    $( ".next_button button:first" ).button({icons: { primary: null, secondary: "ui-icon-arrowthick-1-e" } }) });
+  
+</script>
+
 <%= form_for(@address) do |f| %>
   <div class="fields">
     <div class="field">
@@ -21,7 +28,10 @@
       <%= date_select("valid_until", :valid_until, :order => [:day, :month, :year]) %>
     </div>
   </div>
+
+
   <div class="next_button">
-    <%= f.submit "Next", :type => :image, :src => "assets/next_button.png" %>
+    <button>Next</button>
   </div>
+
 <% end %>

@@ -16,12 +16,15 @@
   <div id="buttons">
   	<%= render "addressDisplay.html.erb" %>
   </div>
+
+  <div style="float:right">
   <%= button_to "Update", :controller => "users", :action => "run_update", :address_id => @user.addresses.first.id %>
       
   <!-- Tweet Button -->
   <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= @user.first_name%> has changed the address using NomAddress.com!"  data-size="large" data-count="none" data-lang="en">Tweet</a>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+  </div>
+  
 </div>
 
 

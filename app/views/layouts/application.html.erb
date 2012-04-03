@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NomAddress</title>
+  <title>NomAddress <%=@title || ""%></title>
   <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js" %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" %>
   <%= stylesheet_link_tag    "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -19,13 +19,15 @@
       <% end %>
     </div>
   </div>
-  <%= yield %>
-  <br>
-  <br>
+
+  <section>
+    <%= yield %>
+    <br>
+    <br>
+  </section>
   <div class='footer' style="text-align:center;">
+    <img id='clouds'src="/assets/clouds.png" />
   	<%= render 'layouts/footer' %>
   </div>
-  <img id='clouds'src="/assets/clouds.png" style="z-index:-1"/>
-    
 </body>
 </html>
