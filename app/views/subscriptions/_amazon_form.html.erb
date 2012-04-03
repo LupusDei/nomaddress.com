@@ -1,0 +1,22 @@
+<%= form_for(@amazon_subscribable, :url => {:controller => :subscriptions, :action => :create}) do |f| %>
+  <%= f.hidden_field :address_id, :value => @amazon_subscribable.address_id %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label "Full Name" %><br />
+    <%= f.text_field :full_name %>
+  </div>
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
+  </div>
+  <div class="field">
+    <%= f.label "Phone number" %><br />
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

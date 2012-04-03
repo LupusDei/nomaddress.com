@@ -14,7 +14,8 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/new.json
   def new
     @subscription = Subscription.new(:address_id => params[:address_id])
-    @subscribable = Dmv.new(:address_id => params[:address_id])
+    @dmv_subscribable = Dmv.new(:address_id => params[:address_id])
+    @amazon_subscribable = Amazon.new(:address_id => params[:address_id])
 
     if params[:firsttime]
       render :firsttime

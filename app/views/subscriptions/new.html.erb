@@ -1,3 +1,21 @@
+<script>
+	$(function() {
+		$( "#accordion" ).accordion({ active: false, collapsible: true});
+	});
+	</script>
+
 <h1>New subscription</h1>
 
-<%= render 'form' %>
+<div id="accordion">
+	<h3><a href="#">DMV</a></h3>
+	<div>
+                <%= render 'dmv_form' %>
+	</div>
+	<h3><a href="#">Amazon</a></h3>
+	<div>
+		<%= render 'amazon_form' %>
+	</div>
+</div>
+
+
+
