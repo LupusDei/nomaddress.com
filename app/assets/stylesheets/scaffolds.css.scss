@@ -1,3 +1,12 @@
+* {
+	margin: 0;
+}
+
+
+html{
+	height: 100%;
+}
+
 body {
   background-image: url('background.png');
   color: #333;
@@ -207,8 +216,33 @@ div {
 a.img_link:hover {background-color:transparent !important;}
 
 
-.footer {
-	position: relative;
-  margin: 0px -100px -100px -100px;
+.content {
+	min-height: 100%;
+	height: auto !important;
+	margin: -137px 1em -177px; /* the bottom margin is the negative value of the footer's height */
+
 }
 
+.footer {
+	bottom:0px;
+	z-index:-1;
+	background-image:url('/assets/clouds_reverted.png');
+	margin-bottom:-10px;
+	margin-left:-10px;
+	width:105%;
+	height:177px;
+}
+
+.push_header{
+	height:137px;
+}
+
+.push_footer{
+	height:177px;
+}
+
+.fword{
+	text-align:center;
+	padding-top:-10px;
+	bottom:60px;
+}

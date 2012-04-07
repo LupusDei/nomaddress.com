@@ -8,7 +8,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
   <div class= 'header'>
     <a href="/" class="img_link"><img src='/assets/chopped-logo.png'/></a>
     <div style="float:right">
@@ -19,15 +18,16 @@
       <% end %>
     </div>
   </div>
-
+	<div class = "clear"></div>
+<div class="content">
+<div class="push_header"></div>
   <section>
     <%= yield %>
-    <br>
-    <br>
   </section>
-  <div class='footer' style="text-align:center;">
-    <img id='clouds'src="/assets/clouds.png" />
-  	<%= render 'layouts/footer' %>
+<div class="push_footer"></div>
+</div>
+  <div class='footer'>
+    <div class = "fword"><%= render 'layouts/footer' %></div>
   </div>
 </body>
 </html>
