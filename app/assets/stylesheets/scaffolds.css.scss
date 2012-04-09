@@ -219,7 +219,7 @@ a.img_link:hover {background-color:transparent !important;}
 .content {
 	min-height: 100%;
 	height: auto !important;
-	margin: -137px 1em -177px; /* the bottom margin is the negative value of the footer's height */
+	margin: -137px 1em -177px 1em; /* the bottom margin is the negative value of the footer's height */
 
 }
 
@@ -229,7 +229,7 @@ a.img_link:hover {background-color:transparent !important;}
 	background-image:url('/assets/clouds_reverted.png');
 	margin-bottom:-10px;
 	margin-left:-10px;
-	width:105%;
+	width:101%;
 	height:177px;
 }
 
