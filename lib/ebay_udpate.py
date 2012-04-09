@@ -1,4 +1,15 @@
 
+"""
+Script to add a new address on Ebay
+
+author: Siyi Gu(siyigu1), Siddhant Gahlot(gahlot1)
+
+07:26 PM CST
+April 8th, 2012
+
+"""
+
+
 import sys
 import mechanize
 from BeautifulSoup import BeautifulSoup
