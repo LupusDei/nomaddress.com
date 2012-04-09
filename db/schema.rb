@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403010959) do
+ActiveRecord::Schema.define(:version => 20120408193358) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -48,6 +48,19 @@ ActiveRecord::Schema.define(:version => 20120403010959) do
   end
 
   add_index "dmvs", ["address_id"], :name => "index_dmvs_on_address_id"
+
+  create_table "ebays", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "country"
+    t.string   "phone_number"
+    t.integer  "address_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "username"
+  end
+
+  add_index "ebays", ["address_id"], :name => "index_ebays_on_address_id"
 
   create_table "subscribers", :force => true do |t|
     t.string   "name"
