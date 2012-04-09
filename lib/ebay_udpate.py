@@ -1,9 +1,11 @@
 
 import sys
 import mechanize
+from BeautifulSoup import BeautifulSoup
+import re
 
 # Validate arguments
-if (sys.argv.__len__() != 11):
+if (sys.argv.__len__() != 12):
     print ("Arguments Invalid. \nUsage: filename username password first_name last_name address1 addres2 city state zipcode country phone_number")
     sys.exit(0)
 
@@ -20,12 +22,28 @@ zipcode = sys.argv[9]
 country = sys.argv[10]
 phone = sys.argv[11]
 
+
+#parse the phone number
+if(phone.find(" ext:") != -1):
+	phone_array = phone.split(' ext:',1);
+	phone_digits = phone_array[0].split("-", 2);
+	phone_extension = phone_array[1];
+else:
+	phone_digits = phone.split("-",2);
+
+if len(phone_digits) != 3:
+    print "Phone Argument Invalid."
+    print "Please enter your phone number in the following format:"
+    print "XXX-XXX-XXXX ext:XX if you have an extension number"
+    print "or XXX-XXX-XXXX if you don't have an extension number"
+    sys.exit(0)
+
 # Prepare browser
 browser = mechanize.Browser()
 browser.set_handle_robots(False)
 browser.addheaders = [("User-agent", "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.13) Gecko/20101206 Ubuntu/10.10 (maverick) Firefox/3.6.13")]
 
-browser.open("https://signin.ebay.com/ws/eBayISAPI.dll?SignIn")
+browser.open("https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&ru=http%3A%2F%2Fwww.ebay.com%2F")
 
 # Select log-in form
 browser.select_form(name="SignInForm")
@@ -33,80 +51,83 @@ browser["userid"] = username
 browser["pass"] = password
 
 browser.submit()
-
-if (browser.title() == "Welcome to eBay - Sign in"): # Wrong password or username
+if (browser.title() != "eBay.com"): # Wrong password or username
     print "The username and password you entered do not match any accounts on record."
     sys.exit(0)
 
 # Go to Add New Address page
-browser.open("http://payments.ebay.com/ws/eBayISAPI.dll?UserAddresses&cmd=standalone")
+open_response = browser.open("http://payments.ebay.com/ws/eBayISAPI.dll?UserAddresses&cmd=standalone")
+
+# Get the country corresponding code for ebay
+open_response_html = open_response.read()
+open_soup = BeautifulSoup(open_response_html)
+country_select = open_soup.find("select", id="country")
+country_options = country_select.findAll("option")
+
+country_code = -1
+
+for option in country_options:
+    if country == option.string.encode():
+        country_code = option["value"].encode()
+
+if country_code == -1:
+    print "Update address failed."
+    print "Your country is not supported by eBay."
+    sys.exit(0)
+
+
 browser.select_form(name="pageForm")
 
 # Fill out the form
-browser["country"] = country
+browser["country"] = [country_code]
 browser["contactName"] = first_name + " " + last_name
 browser["address1"] = address1
 browser["address2"] = address2
-browser["stateName"] = state
-browser["enterAddressStateOrRegion"] = state
+browser["city"] = city
+browser["stateName"] = [state]
 browser["zip"] = zipcode
-phone_array = phone.split('ext.',1);
-phone_digit = phone_array[0].split("-", 1);
-phone_extension = phone_array[1];
-browser["dayphone1"] = phone_digit[0];
-browser["dayphone2"] = phone_digit[1];
-browser["dayphone3"] = phone_digit[2];
-browser["dayphone4"] = phone_extension;
+browser["dayphone1"] = phone_digits[0]
+browser["dayphone2"] = phone_digits[1]
+browser["dayphone3"] = phone_digits[2]
+
+if(phone.find(" ext:") != -1):
+    browser["dayphone4"] = phone_extension;
 
 #make this address preferred address
-browser["preferred"] = 1;
+browser["preferred"] = ["1"];
 
 # Submit the form by clicking Save & Continue
-browser.submit(name="pageForm")
+response = browser.submit(nr=3);
 
-if (browser.title() == "Your Account"):
+#get the resposne html
+response_html = response.read();
+soup = BeautifulSoup(response_html);
+errorMsg = soup.find("div", "stsMsg");
+
+#check if error message printed
+if(errorMsg == None):
     print "Congratulations! Successfully added new address!"
     sys.exit(0)
 else:
-    browser.select_form(nr=1)
+    print "Update address failed."
+    errorName = soup.findAll("span", "status_fieldName")
+    errorInfo = soup.findAll("span", "status_errorMsg")
 
-try:
-    
-    # Select original address if an address was entered
-    # and Amazon has a suggestion
-    browser.find_control("addr").items[0].selected = True
-   
-    # Store suggestion for future print 
-    suggested_address1 = browser["addr_1address1"]
-    suggested_address2 = browser["addr_1address2"]
-    suggested_address3 = browser["addr_1address3"]
-    suggested_city = browser["addr_1city"]
-    suggested_state = browser["addr_1state"]
-    suggested_zip = browser["addr_1zip"]
+    #no error name meaning the error is an address error
+    #print the suggested address
+    if(len(errorName) == 0):
+        recommend_address_div = soup.findAll("div", id="raddrPanel")
+        recommend_address_spans = recommend_address_div[0].findAll("span")
+        print "Please verify your address. The address recommended for you is:"
+	for i in range (1, 3):
+	        for content in recommend_address_spans[i].contents:
+        	    if content.string != None:
+                	print(content.string),
 
-    browser.submit(name="useSelectedAddress")
-    
-    if (browser.title() == "Your Account"):
-        # On address book. Successfully added new address
-        print "Congratulations! Successfully added new address!"
-
-        # Print suggestion
-        print "Address suggested by Amazon:"
-        print suggested_address1 # address1 should not be empty in any case
-
-        # Print address lines if they are not empty
-        if (suggested_address2 != ""):
-            print suggested_address2
-
-        if (suggested_address3 != ""):
-            print suggested_address3
-
-        print suggested_city + " " + suggested_state + ", " + suggested_zip
-
+    #print the error otherwise
     else:
-        # Address not added. Unknown Error
-        print "Failed to add new address!"
+        print "You have to fix the errors below:"
+        for i in range(len(errorName)):
+	    print (errorName[i].string.encode()) + " - " + (errorInfo[i].string.encode())
 
-except mechanize._form.ControlNotFoundError, e:
-    # Could not find the control, due to invalid address. Exit
-    print "Failed to add new address! Address not valid!"
+    sys.exit(0) 
