@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120408193358) do
+ActiveRecord::Schema.define(:version => 20120412225032) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20120408193358) do
     t.integer  "address_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password"
   end
 
   add_index "amazons", ["address_id"], :name => "index_amazons_on_address_id"
