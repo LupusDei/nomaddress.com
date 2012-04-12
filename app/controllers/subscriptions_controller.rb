@@ -44,17 +44,19 @@ class SubscriptionsController < ApplicationController
     else
       if params[:dmv]
         @subscription = Subscription.create(:address_id => params[:dmv][:address_id])
-        @dmv = Dmv.new(params[:dmv])
+        @dmv = Dmv.find_or_initialize_by_address_id(params[:dmv][:address_id])
+        @dmv.update_attributes(params[:dmv])
         @dmv.subscription = @subscription
         @dmv.save
       else
         @subscription = Subscription.create(:address_id => params[:amazon][:address_id])
-        @amazon = Amazon.new(params[:amazon])
+        @amazon = Amazon.find_or_initialize_by_address_id(params[:amazon][:address_id])
+        @amazon.update_attributes(params[:amazon])
         @amazon.subscription = @subscription
         @amazon.save
       end
         
-      redirect_to @subscription
+      redirect_to user_path(current_user)
     end
   end
 

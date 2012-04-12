@@ -1,4 +1,4 @@
-<%= form_for(@amazon_subscribable, :url => {:controller => :subscriptions, :action => :create}) do |f| %>
+<%= form_for(@amazon_subscribable, :url => {:controller => :subscriptions, :action => :create}, :method => :post) do |f| %>
   <%= f.hidden_field :address_id, :value => @amazon_subscribable.address_id %>
   <div class="field">
     <%= f.label :email %><br />
