@@ -13,9 +13,8 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/new
   # GET /subscriptions/new.json
   def new
-    @subscription = Subscription.new(:address_id => params[:address_id])
-    @dmv_subscribable = Dmv.new(:address_id => params[:address_id])
-    @amazon_subscribable = Amazon.new(:address_id => params[:address_id])
+    @dmv_subscribable = Dmv.find_or_initialize_by_address_id(params[:address_id])
+    @amazon_subscribable = Amazon.find_or_initialize_by_address_id(params[:address_id])
 
     if params[:firsttime]
       render :firsttime
@@ -43,10 +42,18 @@ class SubscriptionsController < ApplicationController
         format.html { redirect_to :controller => 'users', :action => 'new', :address_id => @subscription.address_id.to_s}
       end
     else
-      @subscription = Subscription.create(:address_id => params[:dmv][:address_id])
-      @dmv = Dmv.new(params[:dmv])
-      @dmv.subscription = @subscription
-      @dmv.save
+      if params[:dmv]
+        @subscription = Subscription.create(:address_id => params[:dmv][:address_id])
+        @dmv = Dmv.new(params[:dmv])
+        @dmv.subscription = @subscription
+        @dmv.save
+      else
+        @subscription = Subscription.create(:address_id => params[:amazon][:address_id])
+        @amazon = Amazon.new(params[:amazon])
+        @amazon.subscription = @subscription
+        @amazon.save
+      end
+        
       redirect_to @subscription
     end
   end

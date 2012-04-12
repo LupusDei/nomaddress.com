@@ -19,5 +19,9 @@
 </p>
 
 <% @address.subscriptions.each do |sub| %>
+  <p>
   <%= render "subscriptions/quickshow.html.erb", :@subscription => sub %>
+  </p>
 <% end %>
+
+<%= link_to "Create/Edit Subscriptions", new_subscription_path(:address_id => @address.id) %>

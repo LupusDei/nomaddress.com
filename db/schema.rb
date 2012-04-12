@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20120408193358) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "valid_until"
     t.integer  "user_id"
   end
 

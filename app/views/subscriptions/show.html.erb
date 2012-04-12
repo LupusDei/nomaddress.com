@@ -2,12 +2,12 @@
 
 <p>
   <b>Subscriber:</b>
-  <%= @subscription.subscribable.type %>
+  <%= @subscription.subscribable_type %>
 </p>
 
 <p>
   <b>Address:</b>
-  <%= render "./../addresses/quickshow.html.erb", :address => @subscription.address %>
+  <%= @subscription.address.line1 %>
 </p>
 
 

@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     c.login_field = :email
   end
   has_many :addresses
+  has_many :subscriptions, :through => :addresses
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :email, :presence => true, :uniqueness => true, :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i}

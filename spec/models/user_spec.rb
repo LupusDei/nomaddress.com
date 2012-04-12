@@ -23,6 +23,17 @@ describe User do
     user.addresses.size.should == 1
   end
 
+  it "has subscriptions through addresses" do
+    adr = Address.new(:line1 => "Address", :city => "somewhere", :zip => "314159", :state => "mystate")
+    @valid_user.addresses << adr
+    @valid_user.save
+    
+    adr.subscriptions.create(:subscribable_type => "Dmv", :subscribable_id => 1)
+    adr.subscriptions.size.should == 1
+
+    @valid_user.subscriptions.size.should == 1
+  end
+
   it "becomes active after confirmation" do
     @valid_user.save
     @valid_user.status.should == "pending"
