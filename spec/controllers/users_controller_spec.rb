@@ -20,16 +20,17 @@ describe UsersController do
   end
 
   describe "Update Scripts" do
+    before do
+      @address = Address.new(:line1 => "Address",:line2 => "2", :city => "somewhere", :zip => "123456", :state => "somestate")
+      @user.addresses << @address
+      @user.save
+    end
     describe "Dmv script" do
       before do
-        @address = Address.new(:line1 => "Address", :city => "somewhere", :zip => "123456", :state => "somestate")
         @valid_dmv = Dmv.new(:driver_license => "s123456", :ssn => "1234", :county => "Champaign")
-        @user.addresses << @address
-        @user.save
         @valid_dmv.address = @address
         @valid_dmv.save
         @address.subscriptions.create(:subscribable => @valid_dmv)
-
         @address.subscriptions.first.subscribable.should == @valid_dmv
       end
 
@@ -42,12 +43,30 @@ describe UsersController do
 
         get :run_update, :address_id => @address.id
       end
+    end
 
-      it "redirects to the user page with a success message" do
-        ignore_login_required
-        get :run_update, :address_id => @address.id
-        flash[:notice].should == "Your address update has completed successfully!"
+    describe "Amazon script" do
+      before do
+        @valid_amazon = Amazon.new(:email => "fake@fake.com", :password => "fakefake", :full_name => "Fake Fake", :country => "US", :phone_number => "8471234567")
+        @valid_amazon.address = @address
+        @valid_amazon.save!
+        @address.subscriptions.create(:subscribable => @valid_amazon)
+        @address.subscriptions.first.subscribable.should == @valid_amazon
       end
+
+      it "will kick off the amazon update script" do
+        ignore_login_required
+
+        UpdateRunner.should_receive(:run_amazon).with({:email => @valid_amazon.email, :password => @valid_amazon.password, :full_name => @valid_amazon.full_name, :address1 => @address.line1, :address2 => @address.line2, :city => @address.city, :state => @address.state, :zip => @address.zip, :country => @valid_amazon.country, :phone_number => "8471234567"}) 
+        
+        get :run_update, :address_id => @address.id
+      end
+      
+    end
+    it "redirects to the user page with a success message" do
+      ignore_login_required
+      get :run_update, :address_id => @address.id
+      flash[:notice].should == "Your address update has completed successfully!"
     end
   end
 

@@ -8,7 +8,6 @@ describe Ebay do
     @valid_ebay.should be_valid
   end
 
-
   it "is a subscribable" do
     @valid_ebay.subscription.should be_nil
   end
