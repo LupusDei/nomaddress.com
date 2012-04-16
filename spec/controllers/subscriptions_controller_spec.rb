@@ -5,6 +5,11 @@ describe SubscriptionsController do
     {:address_id => 1}
   end
 
+  before do
+    @user = mock(User, :id => 1)
+    controller.stub!(:current_user).and_return(@user)
+  end
+
   describe "GET show" do
     it "assigns the requested subscription as @subscription" do
       subscription = Subscription.create! valid_attributes
@@ -14,9 +19,10 @@ describe SubscriptionsController do
   end
 
   describe "GET new" do
-    it "assigns a new subscription as @subscription" do
+    it "assigns new subscribables as @dmv_subscribable and @amazon_subscribable" do
       get :new
-      assigns(:subscription).should be_a_new(Subscription)
+      assigns(:dmv_subscribable).should be_a_new(Dmv)
+      assigns(:amazon_subscribable).should be_a_new(Amazon)
     end
   end
 
@@ -32,12 +38,12 @@ describe SubscriptionsController do
     describe "with valid params" do
       it "creates a new Subscription" do
         expect {
-          post :create, :subscription => valid_attributes
+          post :create, :subscription => valid_attributes, :firsttime => true
         }.to change(Subscription, :count).by(1)
       end
 
       it "assigns a newly created subscription as @subscription" do
-        post :create, :subscription => valid_attributes
+        post :create, :subscription => valid_attributes, :firsttime => true
         assigns(:subscription).should be_a(Subscription)
         assigns(:subscription).should be_persisted
       end
@@ -47,18 +53,9 @@ describe SubscriptionsController do
         response.should redirect_to(new_user_url(:address_id => "1"))
       end
 
-      it "redirects to the subscription show page if 'firsttime' is not present" do
+      it "redirects to the user show page if 'firsttime' is not present" do
         post :create, :subscription => valid_attributes
-        response.should redirect_to(Subscription.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved subscription as @subscription" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Subscription.any_instance.stub(:save).and_return(false)
-        post :create, :subscription => {}
-        assigns(:subscription).should be_a_new(Subscription)
+        response.should redirect_to(user_path(@user))
       end
     end
   end

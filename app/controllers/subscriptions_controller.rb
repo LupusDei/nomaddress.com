@@ -48,7 +48,8 @@ class SubscriptionsController < ApplicationController
         @dmv.update_attributes(params[:dmv])
         @dmv.subscription = @subscription
         @dmv.save
-      else
+      end
+      if params[:amazon]
         @subscription = Subscription.create(:address_id => params[:amazon][:address_id])
         @amazon = Amazon.find_or_initialize_by_address_id(params[:amazon][:address_id])
         @amazon.update_attributes(params[:amazon])
