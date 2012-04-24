@@ -13,9 +13,9 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/new
   # GET /subscriptions/new.json
   def new
+    @subscription = Subscription.new(:address_id => params[:address_id])
     @dmv_subscribable = Dmv.find_or_initialize_by_address_id(params[:address_id])
     @amazon_subscribable = Amazon.find_or_initialize_by_address_id(params[:address_id])
-
     if params[:firsttime]
       render :firsttime
     else
