@@ -6,18 +6,25 @@ class UsersController < ApplicationController
 
 
   def run_update
-    address = current_user.addresses.find(params[:address_id])
-    dmv = address.subscriptions.find_by_subscribable_type("Dmv").try(:subscribable)
-    amazon = address.subscriptions.find_by_subscribable_type("Amazon").try(:subscribable)
-    if dmv
-      UpdateRunner.run_dmv({:driver_license => dmv.driver_license, :ssn => dmv.ssn,
-                          :county => dmv.county.upcase, :street => address.line1 + " " + address.line2,
-                          :city => address.city, :zipCode => address.zip})
+    notice = "Your address update has completed successfully!"
+    if (!current_user.valid_password? params[:password])
+      notice = "The password you entered is invalid!"
     end
-    if amazon
-      UpdateRunner.run_amazon({:email => amazon.email, :password => amazon.password, :full_name => amazon.full_name, :address1 => address.line1, :address2 => address.line2, :city => address.city, :state => address.state, :zip => address.zip, :country => amazon.country, :phone_number => "8471234567"})
+
+    if (notice != "The password you entered is invalid!")
+      address = current_user.addresses.find(params[:address_id])
+      dmv = address.subscriptions.find_by_subscribable_type("Dmv").try(:subscribable)
+      amazon = address.subscriptions.find_by_subscribable_type("Amazon").try(:subscribable)
+      if dmv
+        UpdateRunner.run_dmv({:driver_license => dmv.driver_license, :ssn => dmv.ssn,
+                            :county => dmv.county.upcase, :street => address.line1 + " " + address.line2,
+                            :city => address.city, :zipCode => address.zip})
+      end
+      if amazon
+        UpdateRunner.run_amazon({:email => amazon.email, :password => amazon.password, :full_name => amazon.full_name, :address1 => address.line1, :address2 => address.line2, :city => address.city, :state => address.state, :zip => address.zip, :country => amazon.country, :phone_number => "8471234567"})
+      end
     end
-    redirect_to user_path(current_user), :notice => "Your address update has completed successfully!"
+    redirect_to user_path(current_user), :notice => notice
   end
 
   def show
