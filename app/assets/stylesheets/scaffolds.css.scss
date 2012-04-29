@@ -128,6 +128,10 @@ div {
   color: red;
 }
 
+#instruction {
+  color: green;
+}
+
 #address {
   text-align: center;
   font-size: 12px;
@@ -149,16 +153,15 @@ div {
 }
 
 #buttons {
-	background-color: #CAE6E9;
+  background-color: #CAE6E9;
   margin-left: auto;
   margin-right: auto;
-  width: 340px;
+  width: 450px;
 }
 
 .button_to {
-
-	margin: 20px 10px;
-	font-size: 50px;
+	text-align: center;
+	font-size:x-large;
 }
 
 .twitter-share-button {

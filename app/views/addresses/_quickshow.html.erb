@@ -1,27 +1,49 @@
-<p id="notice"><%= notice %></p>
+<script type="text/javascript">
+$(document).ready(function(){
+$( "input:submit", ".update_button" ).button();
+});
+</script>
 
+
+<% if @address %>
+<div style="text-align:center"> 
+<%= link_to "Create/Edit Subscriptions", new_subscription_path(:address_id => @address.id) %>
+</div>
+<div style="text-align:center">Or</div>
+<div class="update_button">
+  <%= button_to "Update This Address Now!", :controller => "users", :action => "run_update", :address_id => @address.id %>
+</div>
+<br>
 <p>
+<div>
   <b>Line1:</b>
   <%= @address.line1 %>
-
+</div>
+<div>
 <% if @address.line2 %>
     <b>Line2:</b>
     <%= @address.line2 %>
 <% end %>
+</div>
+<div>
   <b>City:</b>
   <%= @address.city %>
+</div>
+<div>
   <b>State:</b>
   <%= @address.state %>
+</div>
+<div>
   <b>Zip:</b>
   <%= @address.zip %>
-  <b>Category:</b>
-  <%= @address.category %>
+</div>
 </p>
-
 <% @address.subscriptions.each do |sub| %>
   <p>
   <%= render "subscriptions/quickshow.html.erb", :@subscription => sub %>
   </p>
 <% end %>
 
-<%= link_to "Create/Edit Subscriptions", new_subscription_path(:address_id => @address.id) %>
+<% else %>
+	You haven't updated any addresses for this category yet. Update today!
+<% end %>

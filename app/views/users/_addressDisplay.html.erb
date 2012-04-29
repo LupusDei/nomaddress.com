@@ -1,25 +1,40 @@
 <script>
-	$(function() {
-		$( "#tabs" ).tabs({ disable: true, collapsible: true }) });
+$(function() {
+		$( "#tabs" ).accordion({ autoHeight: false});
+	});
+
 </script>
 
 <div id="tabs">
-   <ul>
-      <li><img style="float:left" src="/assets/home_icon.png"><a href="#tabs-1">Home</a></li>
-      <li><a href="#tabs-2">Office</a></li>
-      <li><a href="#tabs-3">School</a></li>
-      <li><a href="#tabs-4">Travel</a></li>
-   </ul>
-   <div id="tabs-1">
-      Tab 1 content
-   </div>
-   <div id="tabs-2">
-      Tab 2 content
-   </div>
-   <div id="tabs-3">
-      Tab 3 content
-   </div>
-   <div id="tabs-4">
-      Tab 4 content
-   </div>
-</div>
+	<h3><a href="#home">Home</a></h3>
+	<div>
+		<p>
+			<%= render "addresses/quickshow.html.erb", :@address => home %>
+		</p>
+	</div>
+	<h3><a href="#office">Office</a></h3>
+	<div>
+		<p>
+			<%= render "addresses/quickshow.html.erb", :@address => office %>
+		</p>
+	</div>
+	<h3><a href="#school">School</a></h3>
+	<div>
+		<p>
+			<%= render "addresses/quickshow.html.erb", :@address => school %>
+		</p>
+	</div>
+	<h3><a href="#travel">Travel</a></h3>
+	<div>
+		<p>
+			<%= render "addresses/quickshow.html.erb", :@address => travel %>
+		</p>
+	</div>
+	<h3><a href="#travel">Other</a></h3>
+	<div>
+		<p>
+			<%= render "addresses/quickshow.html.erb", :@address => other %>
+		</p>
+	</div>
+
+  </div>
