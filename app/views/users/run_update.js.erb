@@ -1,0 +1,23 @@
+<% if @notice == "The password you entered is invalid!" %>
+  
+  var password = $( "#password" );
+  password.addClass( "ui-state-error" );
+  ajaxTips = $( ".validateTips" );
+
+  ajaxTips
+        .text( "The password you entered is invalid!" )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+
+  $("#notice").html("");
+<% else %>
+  /*Hide the div post_errors*/
+
+  <% flash[:notice] = "Your address update has completed successfully!" %>
+  $( "#dialog-form" ).dialog( "close" );
+
+  /*Update the html of the div flash_notice with the new one*/
+  $("#notice").html("<%= escape_javascript(flash[:notice])%>");
+<% end %>

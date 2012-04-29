@@ -165,7 +165,7 @@ div {
 }
 
 .twitter-share-button {
-	margin: 0px;
+	margin-left: 2px;
 }
 
 .clear{
@@ -248,4 +248,17 @@ a.img_link:hover {background-color:transparent !important;}
 	text-align:center;
 	padding-top:-10px;
 	bottom:60px;
+}
+
+div.updateArea
+{
+  width:80px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}
+
+#update
+{
+  margin-bottom: 5px;
 }

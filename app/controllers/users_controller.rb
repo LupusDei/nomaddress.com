@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
 
   def run_update
-    notice = "Your address update has completed successfully!"
+    @notice = "Your address update has completed successfully!"
     if (!current_user.valid_password? params[:password])
-      notice = "The password you entered is invalid!"
+      @notice = "The password you entered is invalid!"
     end
 
     if (notice != "The password you entered is invalid!")
@@ -24,7 +24,11 @@ class UsersController < ApplicationController
         UpdateRunner.run_amazon({:email => amazon.email, :password => amazon.password, :full_name => amazon.full_name, :address1 => address.line1, :address2 => address.line2, :city => address.city, :state => address.state, :zip => address.zip, :country => amazon.country, :phone_number => "8471234567"})
       end
     end
-    redirect_to user_path(current_user), :notice => notice
+
+    respond_to do | format |  
+        format.js {render :layout => false}  
+    end
+    #redirect_to user_path(current_user), :notice => notice
   end
 
   def show
