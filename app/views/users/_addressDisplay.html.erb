@@ -9,31 +9,31 @@ $(function() {
 	<h3><a href="#home">Home</a></h3>
 	<div>
 		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => home %>
+			<%= render "addresses/quickshow.html.erb", :@address => params[:home] %>
 		</p>
 	</div>
 	<h3><a href="#office">Office</a></h3>
 	<div>
 		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => office %>
+			<%= render "addresses/quickshow.html.erb", :@address => params[:office] %>
 		</p>
 	</div>
 	<h3><a href="#school">School</a></h3>
 	<div>
 		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => school %>
+			<%= render "addresses/quickshow.html.erb", :@address => params[:school] %>
 		</p>
 	</div>
 	<h3><a href="#travel">Travel</a></h3>
 	<div>
 		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => travel %>
+			<%= render "addresses/quickshow.html.erb", :@address => params[:travel] %>
 		</p>
 	</div>
 	<h3><a href="#travel">Other</a></h3>
 	<div>
 		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => other %>
+			<%= render "addresses/quickshow.html.erb", :@address => params[:other] %>
 		</p>
 	</div>
 
