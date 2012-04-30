@@ -2,17 +2,33 @@
   Welcome to NomAddress <%= @user.first_name%>!
   
   <p id="construction">The site is currently under construction, but you will be hearing from us soon!</p>
+  <p id="instruction">Select the address you would like to update below!</p>
  </div>
 
-<div id="address">
-
-  <% @user.addresses.each do |a| %>
-    <%= render "addresses/quickshow.html.erb", :@address => a %>
-  <% end %>
-</div>
 <div id="user_box">
   <div id="buttons">
-  	<%= render "addressDisplay.html.erb" %>
+  <p id="notice" style="text-align:center"><%= notice %></p>	
+   <div id="buttons">
+	<% home = nil %>
+	<% office = nil %>  	
+	<% school = nil %>  	
+	<% travel = nil %>  	
+	<% other = nil %> 	
+	<% @user.addresses.each do |a| %>  	
+		<% if a.category == "Home" %> 	
+			<% home = a %>
+		<% elsif a.category == "Office" %>
+			<% office = a %>
+		<% elsif a.category == "School" %>
+			<% school = a %>
+		<% elsif a.category == "Travel" %>
+			<% travel = a %>
+		<% else %>
+			<% other = a %>
+		<% end %>
+	<% end %>  	
+<%= render :partial => "addressDisplay.html.erb", :locals => {:home => home, :office => office, :school => school, :travel => travel, :other => other} %>
+
   </div>
 
   <div id="dialog-form" title="Create new user">
