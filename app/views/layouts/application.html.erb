@@ -9,7 +9,8 @@
 </head>
 <body>
   <div class= 'header'>
-    <a href="/" class="img_link"><img src='/assets/chopped-logo.png'/></a>
+    <%- link = current_user ? user_path(current_user) : root_path -%>
+    <a href=<%= link %> class="img_link"><img src='/assets/chopped-logo.png'/></a>
     <div style="float:right;padding-right:10px">
       <% if current_user %>
         <%= link_to 'logout', logout_path %>
@@ -20,7 +21,8 @@
   </div>
 	<div class = "clear"></div>
 <div class="content">
-<div class="push_header"></div>
+<div class="push_header">
+</div>
   <section>
     <%= yield %>
   </section>

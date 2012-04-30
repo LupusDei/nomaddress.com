@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       @notice = "The password you entered is invalid!"
     end
 
-    if (notice != "The password you entered is invalid!")
+    if (@notice != "The password you entered is invalid!")
       address = current_user.addresses.find(params[:address_id])
       dmv = address.subscriptions.find_by_subscribable_type("Dmv").try(:subscribable)
       amazon = address.subscriptions.find_by_subscribable_type("Amazon").try(:subscribable)
