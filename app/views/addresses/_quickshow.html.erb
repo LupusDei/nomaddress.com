@@ -11,7 +11,7 @@ $( "input:submit", ".update_button" ).button();
 </div>
 <div style="text-align:center">Or</div>
 <div class="update_button">
-  <%= button_to "Update This Address Now!", :controller => "users", :action => "run_update", :address_id => @address.id %>
+  <button id="update">Update</button>
 </div>
 <br>
 <p>
