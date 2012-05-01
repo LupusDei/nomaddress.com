@@ -45,6 +45,9 @@ class UsersController < ApplicationController
   end
 
   def new
+    if current_user
+      redirect_to user_path(current_user)
+    end
     @user = User.new
     respond_to do |format|
       format.html # new.html.erb

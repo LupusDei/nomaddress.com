@@ -1,6 +1,6 @@
 <script>
 $(function() {
-		$( "#tabs" ).accordion({ autoHeight: false});
+		$( "#tabs" ).accordion({ autoHeight: false, collapsible: true});
 	});
 
 </script>
@@ -12,29 +12,37 @@ $(function() {
 			<%= render "addresses/quickshow.html.erb", :@address => home %>
 		</p>
 	</div>
-	<h3><a href="#office">Office</a></h3>
-	<div>
-		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => office %>
-		</p>
-	</div>
-	<h3><a href="#school">School</a></h3>
-	<div>
-		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => school %>
-		</p>
-	</div>
-	<h3><a href="#travel">Travel</a></h3>
-	<div>
-		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => travel %>
-		</p>
-	</div>
-	<h3><a href="#travel">Other</a></h3>
-	<div>
-		<p>
-			<%= render "addresses/quickshow.html.erb", :@address => other %>
-		</p>
-	</div>
+  <%- if office %>
+    <h3><a href="#office">Office</a></h3>
+    <div>
+      <p>
+        <%= render "addresses/quickshow.html.erb", :@address => office %>
+      </p>
+    </div>
+  <%- end %>
+  <%- if school %>
+    <h3><a href="#school">School</a></h3>
+    <div>
+      <p>
+        <%= render "addresses/quickshow.html.erb", :@address => school %>
+      </p>
+    </div>
+  <%- end %>
+  <%- if travel %>
+    <h3><a href="#travel">Travel</a></h3>
+    <div>
+      <p>
+        <%= render "addresses/quickshow.html.erb", :@address => travel %>
+      </p>
+    </div>
+  <%- end %>
+  <%- if other %>
+    <h3><a href="#travel">Other</a></h3>
+    <div>
+      <p>
+        <%= render "addresses/quickshow.html.erb", :@address => other %>
+      </p>
+    </div>
+  <%- end %>
 
   </div>
