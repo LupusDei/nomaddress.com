@@ -1,6 +1,7 @@
-<br>
-<% if @subscription.subscribable_id != nil %>
-  <b>Subscriber:</b>
-  <%= @subscription.subscribable_type %>
-  <%= render "subscriptions/#{@subscription.subscribable_type.downcase}.html.erb", :@subscribable => @subscription.subscribable %>
-<% end %>
+<div class="subscription">
+  <% if @subscription.subscribable_id != nil %>
+    <b>Subscriber:</b>
+    <%= @subscription.subscribable_type %>
+    <%= render "subscriptions/#{@subscription.subscribable_type.downcase}.html.erb", :@subscribable => @subscription.subscribable %>
+  <% end %>
+</div>

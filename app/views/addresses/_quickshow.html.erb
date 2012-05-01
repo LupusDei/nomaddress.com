@@ -4,16 +4,7 @@ $( "input:submit", ".update_button" ).button();
 });
 </script>
 
-
 <% if @address %>
-<div style="text-align:center"> 
-<%= link_to "Create/Edit Subscriptions", new_subscription_path(:address_id => @address.id) %>
-</div>
-<div style="text-align:center">Or</div>
-<div class="update_button">
-  <button id="update">Update</button>
-</div>
-<br>
 <p>
 <div>
   <b>Line1:</b>
@@ -38,12 +29,90 @@ $( "input:submit", ".update_button" ).button();
   <%= @address.zip %>
 </div>
 </p>
-<% @address.subscriptions.each do |sub| %>
-  <p>
-  <%= render "subscriptions/quickshow.html.erb", :@subscription => sub %>
-  </p>
-<% end %>
 
-<% else %>
-	You haven't updated any addresses for this category yet. Update today!
-<% end %>
+</br>
+<div id="subscriptions">
+  <h2> Subscribers </h2>
+  <% @address.subscriptions.each do |sub| %>
+    <%= render "subscriptions/quickshow.html.erb", :@subscription => sub %>
+  <% end %>
+
+  <% else %>
+    You haven't updated any addresses for this category yet. Update today!
+  <% end %>
+</div>
+<div style="text-align:center"> 
+  <%= link_to "Create/Edit Subscriptions", new_subscription_path(:address_id => @address.id) %>
+  Or
+  <button id="update">Update</button>
+</div>
+
+<!-- For the popup dialog -->
+<div id="dialog-form" title="We need your password to decrypt your secure information">
+
+<script>
+  $(function() {
+    
+    var password = $( "#password" ),
+      allFields = $( [] ).add( password ),
+      tips = $( ".validateTips" );
+
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+
+    function checkLength( o, n ) {
+      if ( !o.val().length > 0 ) {
+        o.addClass( "ui-state-error" );
+        updateTips( "Password is required" );
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 200,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Update your Address!": function() {
+          var bValid = true;
+          allFields.removeClass( "ui-state-error" );
+
+          bValid = bValid && checkLength( password, "password" );
+          if ( bValid ) {
+            $( '#passwordForm' ).submit();
+            //$( this ).dialog( "close" );
+          }
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        allFields.val( "" ).removeClass( "ui-state-error" );
+      }
+    });
+
+    $( "#update" )
+      .button()
+      .click(function() {
+        $( "#dialog-form" ).dialog( "open" );
+      });
+  });
+  </script>
+  <form id="passwordForm" action="/run_update" method="post" data-remote="true">
+  <fieldset>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" autofocus="autofocus" required="required" />
+    <input type="hidden" name="address_id" value="<%= @user.addresses.first.id %>"/>
+  </fieldset>
+  </form>
+</div>

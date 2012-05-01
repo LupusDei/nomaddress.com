@@ -17,7 +17,7 @@ class AddressesController < ApplicationController
   # GET /addresses/new.json
   def new
     @address = Address.new
-    @user = User.find(params[:user_id])
+    @user = current_user
 
     respond_to do |format|
       format.html # new.html.erb

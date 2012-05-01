@@ -2,6 +2,8 @@
   Welcome to NomAddress <%= @user.first_name%>!
   
   <p id="instruction">Select the address you would like to update below!</p>
+  <p> or </p>
+  <%= link_to "Add a new one!", new_address_path %>
  </div>
 
 <div id="user_box">
@@ -30,82 +32,12 @@
 
   </div>
 
-  <div id="dialog-form" title="Create new user">
-  <p class="validateTips">All form fields are required.</p>
-
-<script>
-  $(function() {
-    
-    var password = $( "#password" ),
-      allFields = $( [] ).add( password ),
-      tips = $( ".validateTips" );
-
-    function updateTips( t ) {
-      tips
-        .text( t )
-        .addClass( "ui-state-highlight" );
-      setTimeout(function() {
-        tips.removeClass( "ui-state-highlight", 1500 );
-      }, 500 );
-    }
-
-    function checkLength( o, n ) {
-      if ( !o.val().length > 0 ) {
-        o.addClass( "ui-state-error" );
-        updateTips( "Password is required" );
-        return false;
-      } else {
-        return true;
-      }
-    }
-
-    $( "#dialog-form" ).dialog({
-      autoOpen: false,
-      height: 200,
-      width: 350,
-      modal: true,
-      buttons: {
-        "Create an account": function() {
-          var bValid = true;
-          allFields.removeClass( "ui-state-error" );
-
-          bValid = bValid && checkLength( password, "password" );
-          if ( bValid ) {
-            $( '#passwordForm' ).submit();
-            //$( this ).dialog( "close" );
-          }
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-      close: function() {
-        allFields.val( "" ).removeClass( "ui-state-error" );
-      }
-    });
-
-    $( "#update" )
-      .button()
-      .click(function() {
-        $( "#dialog-form" ).dialog( "open" );
-      });
-  });
-  </script>
-  <form id="passwordForm" action="/run_update" method="post" data-remote="true">
-  <fieldset>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" autofocus="autofocus" required="required" />
-    <input type="hidden" name="address_id" value="<%= @user.addresses.first.id %>"/>
-  </fieldset>
-  </form>
-</div>
-  <div class="updateArea">
   <!-- Tweet Button -->
+  <p> Let you friends know you just updated your address with NomAddress.com! </p>
   <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= @user.first_name%> has changed the address using NomAddress.com!"  data-size="large" data-count="none" data-lang="en">Tweet</a>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </div>
   
-</div>
 
 
   <div class="clear"></div>

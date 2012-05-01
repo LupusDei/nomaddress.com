@@ -68,7 +68,7 @@ class UsersController < ApplicationController
         
         #mail = MailMan.confirmation(@user)
         #mail.deliver
-        format.html { redirect_to new_address_path(:user_id => @user.id) }
+        format.html { redirect_to new_address_path }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }

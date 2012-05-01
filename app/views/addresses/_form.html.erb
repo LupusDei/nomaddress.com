@@ -6,6 +6,15 @@
 </script>
 
 <%= form_for(@address) do |f| %>
+  <% if @address.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @address.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="fields">
     <div class="field">
       <%= f.label "Street" %>
@@ -24,8 +33,7 @@
       <%= f.text_field :zip, :style => "margin-left: 50px; width: 60px;" %>
     </div>
     <div class="field">
-      <%= f.label "Expected Move Date" %>
-      <%= date_select("valid_until", :valid_until, :order => [:day, :month, :year]) %>
+      <%= f.select :category,options_for_select( Address.valid_categories )%>
     </div>
   </div>
 
