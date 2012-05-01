@@ -14,11 +14,11 @@
       <%= f.label :password %><br />
       <%= f.password_field :password %>
     </div>
-    <%= hidden_field :address, :id, :value => @user.addresses.first.id %>
     <div class="field">
       <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation %>
     </div>
+    <%= hidden_field :user, :id, :value => @user.id %>
   </div>
   <div class="next_button">
     <%= f.submit "Next", :type => :image, :src => "/assets/next_button.png" %>

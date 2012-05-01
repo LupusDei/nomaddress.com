@@ -13,9 +13,10 @@
     <a href=<%= link %> class="img_link"><img src='/assets/chopped-logo.png'/></a>
     <div style="float:right;padding-right:10px">
       <% if current_user %>
-        <%= link_to 'logout', logout_path %>
+        <%= "Hey #{current_user.first_name}!  " %>
+        <%= link_to 'Logout', logout_path %>
       <% else %>
-         <%= link_to 'login', login_path %>
+         <%= link_to 'Login', login_path %>
       <% end %>
     </div>
   </div>

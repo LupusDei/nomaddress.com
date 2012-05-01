@@ -17,6 +17,7 @@ class AddressesController < ApplicationController
   # GET /addresses/new.json
   def new
     @address = Address.new
+    @user = User.find(params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -33,10 +34,11 @@ class AddressesController < ApplicationController
   # POST /addresses.json
   def create
     @address = Address.new(params[:address])
-
+    @user = current_user
+    @user.addresses << @address
     respond_to do |format|
       if @address.save
-        format.html { redirect_to :controller => 'subscriptions', :action => 'new',  :address_id => @address.id, :firsttime => true }
+        format.html { redirect_to user_path(@user)}
       else
         format.html { render action: "new" }
         format.json { render json: @address.errors, status: :unprocessable_entity }

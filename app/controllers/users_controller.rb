@@ -46,7 +46,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @user.addresses << Address.find(params[:address_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -59,12 +58,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.addresses << Address.find(params[:address]["id"])
     respond_to do |format|
       if @user.save
+        @user_session = UserSession.new(:email => @user.email, :password => params[:password])
+        @user_session.save
+        
         #mail = MailMan.confirmation(@user)
         #mail.deliver
-        format.html { redirect_to @user, notice: 'Now you are good to go!' }
+        format.html { redirect_to new_address_path(:user_id => @user.id) }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
